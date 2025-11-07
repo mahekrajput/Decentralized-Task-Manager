@@ -1,34 +1,33 @@
-const addBtn = document.getElementById("addBtn");
-const taskInput = document.getElementById("taskInput");
-const taskList = document.getElementById("taskList");
+// Simulate blockchain in JS
+let tasks = [];
+let accountAddress = "0x" + Math.floor(Math.random()*1e16).toString(16);
 
-let tasks = []; // simulated blockchain storage
-
-addBtn.addEventListener("click", () => {
-  const content = taskInput.value.trim();
-  if (!content) return alert("Enter a task first!");
-
-  // Simulate adding to blockchain
-  const newTask = {
-    id: tasks.length,
-    content,
-    createdBy: "0xABC123... (simulated address)",
-    timestamp: new Date().toLocaleString(),
-  };
-  tasks.push(newTask);
-  renderTasks();
-  taskInput.value = "";
-});
-
-function renderTasks() {
-  taskList.innerHTML = "";
-  tasks.forEach((t) => {
-    const div = document.createElement("div");
-    div.className = "task";
-    div.innerHTML = `
-      <strong>🧾 ${t.content}</strong><br>
-      <small>ID: ${t.id} | Added by: ${t.createdBy} | ${t.timestamp}</small>
-    `;
-    taskList.appendChild(div);
-  });
+function addTask(content) {
+    let timestamp = Math.floor(Date.now() / 1000);
+    let task = {
+        id: tasks.length,
+        content: content,
+        createdBy: accountAddress,
+        timestamp: timestamp
+    };
+    tasks.push(task);
+    console.log("🧾 Task Added:", content);
+    displayTasks();
 }
+
+function displayTasks() {
+    const list = document.getElementById("task-list");
+    list.innerHTML = "";
+    tasks.forEach(task => {
+        let li = document.createElement("li");
+        li.textContent = `#${task.id} | ${task.content} | By: ${task.createdBy} | ${task.timestamp}`;
+        list.appendChild(li);
+    });
+}
+
+// Connect UI
+document.getElementById("add-task-btn").onclick = () => {
+    const input = document.getElementById("task-input");
+    if(input.value) addTask(input.value);
+    input.value = "";
+};
