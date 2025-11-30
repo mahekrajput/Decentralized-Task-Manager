@@ -17,4 +17,7 @@ Each task is recorded with a simulated blockchain account and timestamp.
 Frontend JS simulates task immutability and blockchain behavior.
 
 Solidity contract shows how tasks could be stored on a real blockchain.
+
+# Output:
+
 <img width="1873" height="876" alt="image" src="https://github.com/user-attachments/assets/daa9eb14-af7c-4b93-a353-ae2ec9ad446c" />
